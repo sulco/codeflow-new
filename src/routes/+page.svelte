@@ -37,6 +37,7 @@
 			<label for="name" class="block mb-1">Project name:</label>
 			<input
 				id="name"
+				autofocus
 				class="bg-gray-900 px-2 focus:outline"
 				type="text"
 				bind:value={projectName}
@@ -67,7 +68,7 @@
 		<div>
 			<h2 class="font-semibold mb-2">Initialize project with:</h2>
 			{#each initScripts as option, i}
-				<div class="flex gap-2 mb-1">
+				<div class="flex gap-2 mb-1 group">
 					<input
 						type="radio"
 						name="script"
@@ -83,6 +84,12 @@
 						on:focus={handleFocus}
 						class="bg-transparent hover:bg-gray-900 focus:bg-gray-900 px-2 py-1 focus:outline font-mono text-xs w-full"
 					/>
+					<button
+						class="opacity-0 hover:opacity-80"
+						on:click={() => {
+							initScripts = [...initScripts.slice(0, i), ...initScripts.slice(i + 1)];
+						}}>❌</button
+					>
 				</div>
 			{/each}
 			<div class="flex gap-2 mb-1">
