@@ -4,6 +4,6 @@
 
 @layer components {
     .fieldset {
-        @apply border rounded-sm border-gray-700 p-4;
+        @apply border rounded border-gray-700 p-4 shadow-md;
     }
 }

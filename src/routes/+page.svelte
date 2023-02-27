@@ -18,36 +18,48 @@
 
 <h1 class="my-6 text-xl text-gray-400">start a new project</h1>
 
-<fieldset class="fieldset">
-	<div class="field">
-		<label for="name" class="block mb-1">Project name:</label>
-		<input id="name" class="bg-gray-900 px-2 focus:outline" type="text" bind:value={projectName} />
-	</div>
-</fieldset>
+<div class="grid gap-4">
+	<fieldset class="fieldset">
+		<div class="field">
+			<label for="name" class="block mb-1">Project name:</label>
+			<input
+				id="name"
+				class="bg-gray-900 px-2 focus:outline"
+				type="text"
+				bind:value={projectName}
+			/>
+		</div>
+	</fieldset>
 
-<fieldset class="fieldset">
-	<div class="radios">
-		<h2 class="font-semibold">Git:</h2>
-		{#each gitOptions as option, i}
-			<div class="field">
-				<input type="radio" name="git" id="g{i}" />
-				<label for="g{i}">{option.label}{option.dynamic ? projectName : ''}</label>
-			</div>
-		{/each}
-	</div>
+	<fieldset class="fieldset grid grid-cols-2">
+		<div class="radios">
+			<h2 class="font-semibold mb-2">Git:</h2>
+			{#each gitOptions as option, i}
+				<div class="flex gap-2 mb-1">
+					<input type="radio" name="git" id="g{i}" class="cursor-pointer" />
+					<label for="g{i}" class="cursor-pointer"
+						>{option.label}{option.dynamic ? projectName : ''}</label
+					>
+				</div>
+			{/each}
+		</div>
 
-	<div class="radios">
-		<h2 class="font-semibold">Initialize project with:</h2>
-		{#each initScripts as option, i}
-			<div class="field">
-				<input type="radio" name="script" id="g{i}" />
-				<input type="text" bind:value={option} />
-			</div>
-		{/each}
-	</div>
-</fieldset>
+		<div class="radios">
+			<h2 class="font-semibold mb-2">Initialize project with:</h2>
+			{#each initScripts as option, i}
+				<div class="flex gap-2 mb-1">
+					<input type="radio" name="script" id="g{i}" class="cursor-pointer" />
+					<input
+						type="text"
+						bind:value={option}
+						class="bg-transparent hover:bg-gray-900 focus:bg-gray-900 px-2 py-1 focus:outline font-mono text-xs w-full"
+					/>
+				</div>
+			{/each}
+		</div>
+	</fieldset>
 
-<button>Create</button>
-
-<style lang="postcss">
-</style>
+	<button class="justify-self-end bg-sky-600 text-white rounded-sm font-semibold px-3 py-1"
+		>Create</button
+	>
+</div>
