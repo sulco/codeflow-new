@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .fieldset {
+        @apply border rounded-sm border-gray-700 p-4;
+    }
+}

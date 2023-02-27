@@ -16,18 +16,18 @@
 	];
 </script>
 
-<h1>start a new project</h1>
+<h1 class="my-6 text-xl text-gray-400">start a new project</h1>
 
-<fieldset>
+<fieldset class="fieldset">
 	<div class="field">
-		<label for="name">Project name</label>
-		<input id="name" type="text" bind:value={projectName} />
+		<label for="name" class="block mb-1">Project name:</label>
+		<input id="name" class="bg-gray-900 px-2 focus:outline" type="text" bind:value={projectName} />
 	</div>
 </fieldset>
 
-<fieldset>
+<fieldset class="fieldset">
 	<div class="radios">
-		<h2>Git:</h2>
+		<h2 class="font-semibold">Git:</h2>
 		{#each gitOptions as option, i}
 			<div class="field">
 				<input type="radio" name="git" id="g{i}" />
@@ -37,7 +37,7 @@
 	</div>
 
 	<div class="radios">
-		<h2>Initialize project with:</h2>
+		<h2 class="font-semibold">Initialize project with:</h2>
 		{#each initScripts as option, i}
 			<div class="field">
 				<input type="radio" name="script" id="g{i}" />
@@ -48,3 +48,6 @@
 </fieldset>
 
 <button>Create</button>
+
+<style lang="postcss">
+</style>
