@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import Codeflow from '../components/codeflow.svelte';
 
 	let projectName = 'demo';
 	let gitOption = 0;
 	let initOption = 1;
+	let nameInputRef: HTMLInputElement;
 
 	let gitOptions = [
 		{ label: 'github.com/sulco/', dynamic: true },
@@ -18,6 +20,12 @@
 		'npm init video',
 		'pnpm create next-app --typescript'
 	];
+
+	onMount(() => {
+		nameInputRef.focus();
+		nameInputRef.selectionStart = 0;
+		nameInputRef.selectionEnd = nameInputRef.value.length;
+	});
 
 	function handleFocus(e: any) {
 		setTimeout(() => {
@@ -37,7 +45,7 @@
 			<label for="name" class="block mb-1">Project name:</label>
 			<input
 				id="name"
-				autofocus
+				bind:this={nameInputRef}
 				class="bg-gray-900 px-2 focus:outline text-lg"
 				type="text"
 				bind:value={projectName}
