@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import Codeflow from '../components/codeflow.svelte';
 	import { kebabCase } from 'lodash-es';
+	import { goto } from '$app/navigation';
 
 	let projectName = 'demo';
 	let gitOption = 0;
@@ -33,6 +34,11 @@
 			e.target.selectionStart = e.target.selectionEnd = e.target.value.length;
 		});
 	}
+
+	function handleSubmit(e: Event) {
+		e.preventDefault();
+		goto('setting-up');
+	}
 </script>
 
 <header class="flex gap-2">
@@ -40,7 +46,7 @@
 	<h1 class="my-6 text-xl text-gray-400">start a new project</h1>
 </header>
 
-<div class="grid gap-4">
+<form class="grid gap-4" on:submit={handleSubmit}>
 	<fieldset class="fieldset bg-gray-800">
 		<div class="field">
 			<label for="name" class="block mb-1">Project name:</label>
@@ -99,6 +105,7 @@
 							class="bg-transparent hover:bg-gray-900 focus:bg-gray-900 px-2 py-1 focus:outline font-mono text-xs w-full"
 						/>
 						<button
+							type="button"
 							class="opacity-0 hover:opacity-80"
 							on:click={() => {
 								initScripts = [...initScripts.slice(0, i), ...initScripts.slice(i + 1)];
@@ -131,4 +138,4 @@
 		class="justify-self-end bg-sky-600 text-white rounded-sm font-semibold px-3 py-1 disabled:opacity-50"
 		>Create</button
 	>
-</div>
+</form>
