@@ -38,7 +38,7 @@
 			<input
 				id="name"
 				autofocus
-				class="bg-gray-900 px-2 focus:outline"
+				class="bg-gray-900 px-2 focus:outline text-lg"
 				type="text"
 				bind:value={projectName}
 			/>
