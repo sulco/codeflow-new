@@ -41,6 +41,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Start a new project</title>
+</svelte:head>
+
 <header class="flex gap-2">
 	<Codeflow class="w-12 mix-blend-luminosity opacity-50" />
 	<h1 class="my-6 text-xl text-gray-400">start a new project</h1>
