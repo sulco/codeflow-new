@@ -59,7 +59,7 @@
 		return {
 			y: -20,
 			duration,
-			stagger
+			delay: stagger
 		};
 	}
 </script>
@@ -76,7 +76,7 @@
 </header>
 
 {#if ready}
-	<form class="grid gap-4" on:submit={handleSubmit} transition:fly={fadeIn()}>
+	<form class="grid gap-4" on:submit={handleSubmit} transition:fly={fadeIn(0)}>
 		<fieldset class="fieldset relative">
 			<label for="name" class="block mb-1">Project name:</label>
 			<input
@@ -133,7 +133,7 @@
 			</section>
 		</fieldset>
 
-		<fieldset class="fieldset" transition:fly={fadeIn(stagger * 1.5)}>
+		<fieldset class="fieldset" transition:fly={fadeIn(stagger * 1.8)}>
 			<h2 class="font-semibold mb-2">Initialization script:</h2>
 			{#each initScripts as option, i}
 				<div
