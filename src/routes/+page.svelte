@@ -53,8 +53,10 @@
 </svelte:head>
 
 <header class="flex gap-2">
-	<Codeflow class="w-12 mix-blend-luminosity opacity-50" />
-	<h1 class="my-6 text-xl text-white opacity-25">start a new project</h1>
+	<Codeflow class="w-12 mix-blend-luminosity opacity-50 drop-shadow-[2px_4px_6px_rgba(0,0,0,1)]" />
+	<h1 class="my-6 text-xl text-white opacity-25 drop-shadow-[2px_4px_6px_rgba(0,0,0,1)]">
+		start a new project
+	</h1>
 </header>
 
 <form class="grid gap-4" on:submit={handleSubmit}>
@@ -69,8 +71,14 @@
 			bind:value={projectName}
 		/>
 		<div class="absolute right-8 top-4">
-			<StackIcon value={initScripts[initOption]} class="w-14 absolute right-4 max-w-none" />
-			<svelte:component this={gitOptions[gitOption].logo} class="w-6 h-6 absolute right-0 top-10" />
+			<StackIcon
+				value={initScripts[initOption]}
+				class="w-14 absolute right-4 max-w-none drop-shadow-[2px_4px_6px_rgba(0,0,0,0.5)]"
+			/>
+			<svelte:component
+				this={gitOptions[gitOption].logo}
+				class="w-6 h-6 absolute right-0 top-10 drop-shadow-[2px_4px_6px_rgba(0,0,0,0.5)]"
+			/>
 		</div>
 	</fieldset>
 
@@ -126,7 +134,7 @@
 				/>
 				<StackIcon
 					value={option}
-					class="absolute left-2 {initOption === i ? 'opacity-100' : 'opacity-50'}"
+					class="absolute left-2 w-6 {initOption === i ? 'opacity-100' : 'opacity-50'}"
 				/>
 				<input
 					type="text"

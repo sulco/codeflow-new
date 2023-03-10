@@ -21,4 +21,4 @@
 	}
 </script>
 
-<img src="stacks/{stack}.svg" alt="" class:opacity-20={!value} class="w-6 {$$props.class}" />
+<img src="stacks/{stack}.svg" alt="" class:opacity-20={!value} class={$$props.class} />
