@@ -16,7 +16,7 @@
 	let gitOptions = [
 		{ label: 'github.com/sulco/', logo: Github, dynamic: true },
 		{ label: 'gitlab.com/sulco/', logo: Gitlab, dynamic: true },
-		{ label: 'just run `git init`', logo: Git, dynamic: false },
+		{ label: '`git init` only', logo: Git, dynamic: false },
 		{ label: 'no git', logo: NoGit, dynamic: false }
 	];
 
@@ -59,6 +59,7 @@
 		<div class="field">
 			<label for="name" class="block mb-1">Project name:</label>
 			<input
+				autocomplete="off"
 				id="name"
 				bind:this={nameInputRef}
 				class="bg-gray-900 px-2 focus:outline text-lg"
@@ -77,7 +78,11 @@
 			<section>
 				<h2 class="font-semibold mb-2">Git:</h2>
 				{#each gitOptions as option, i}
-					<div class="flex gap-2 mb-1">
+					<div
+						class="flex gap-2 mb-1 rounded-lg overflow-hidden transition-all {gitOption === i
+							? 'bg-slate-400/10'
+							: ''}"
+					>
 						<input
 							type="radio"
 							name="git"
@@ -87,7 +92,7 @@
 							class="cursor-pointer"
 							hidden
 						/>
-						<label for="g{i}" class="cursor-pointer"
+						<label for="g{i}" class="cursor-pointer flex w-full gap-2 p-3 hover:bg-slate-400/5"
 							><svelte:component this={option.logo} class="w-6 h-6" />
 							{option.label}{option.dynamic ? kebabCase(projectName) : ''}</label
 						>
