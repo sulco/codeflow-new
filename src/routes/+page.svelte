@@ -78,7 +78,7 @@
 {#if ready}
 	<form class="grid gap-4" on:submit={handleSubmit} transition:fly={fadeIn(0)}>
 		<fieldset class="fieldset relative">
-			<label for="name" class="block mb-1">Project name:</label>
+			<label for="name" class="block font-thin mb-1 opacity-50">Project name:</label>
 			<input
 				autocomplete="off"
 				id="name"
@@ -104,7 +104,7 @@
 			the same setup
 		</p>
 		<fieldset class="fieldset" transition:fly={fadeIn(stagger * 0.8)}>
-			<h2 class="font-semibold mb-2">Git:</h2>
+			<h2 class="font-thin mb-2 opacity-50">Version control:</h2>
 			<section>
 				{#each gitOptions as option, i}
 					<div
@@ -134,7 +134,7 @@
 		</fieldset>
 
 		<fieldset class="fieldset" transition:fly={fadeIn(stagger * 1.8)}>
-			<h2 class="font-semibold mb-2">Initialization script:</h2>
+			<h2 class="font-thin mb-2 opacity-50">Initialization script:</h2>
 			{#each initScripts as option, i}
 				<div
 					class="flex gap-2 mb-1 items-center rounded-lg overflow-hidden relative transition-all 
