@@ -58,23 +58,25 @@
 </header>
 
 <form class="grid gap-4" on:submit={handleSubmit}>
-	<fieldset class="fieldset">
-		<div class="field">
-			<label for="name" class="block mb-1">Project name:</label>
-			<input
-				autocomplete="off"
-				id="name"
-				bind:this={nameInputRef}
-				class="bg-gray-900 px-2 outline outline-slate-500/10 outline-1 focus:outline-slate-400/40 text-lg rounded-sm"
-				type="text"
-				bind:value={projectName}
-			/>
+	<fieldset class="fieldset relative">
+		<label for="name" class="block mb-1">Project name:</label>
+		<input
+			autocomplete="off"
+			id="name"
+			bind:this={nameInputRef}
+			class="bg-gray-900 px-2 outline outline-slate-500/10 outline-1 focus:outline-slate-400/40 text-lg rounded-sm"
+			type="text"
+			bind:value={projectName}
+		/>
+		<div class="absolute right-8 top-4">
+			<StackIcon value={initScripts[initOption]} class="w-14 absolute right-4 max-w-none" />
+			<svelte:component this={gitOptions[gitOption].logo} class="w-6 h-6 absolute right-0 top-10" />
 		</div>
 	</fieldset>
 
 	<p class="text-xs mt-4 text-gray-500">
-		💡 The settings you have used previously are already selected so you can hit [enter] to create a
-		project with the same setup
+		💡 Your previous choices are already selected so you can hit [enter] to create a project with
+		the same setup
 	</p>
 	<fieldset class="fieldset">
 		<h2 class="font-semibold mb-2">Git:</h2>
@@ -109,7 +111,10 @@
 	<fieldset class="fieldset">
 		<h2 class="font-semibold mb-2">Initialization script:</h2>
 		{#each initScripts as option, i}
-			<div class="flex gap-2 mb-1 group">
+			<div
+				class="flex gap-2 mb-1 items-center rounded-lg overflow-hidden relative transition-all 
+				{initOption === i ? 'bg-slate-400/10' : ''}"
+			>
 				<input
 					type="radio"
 					name="script"
@@ -119,24 +124,27 @@
 					class="cursor-pointer"
 					hidden
 				/>
-				<StackIcon value={option} />
+				<StackIcon
+					value={option}
+					class="absolute left-2 {initOption === i ? 'opacity-100' : 'opacity-50'}"
+				/>
 				<input
 					type="text"
 					bind:value={option}
 					on:click={() => (initOption = i)}
 					on:focus={handleFocus}
-					class="rounded bg-transparent hover:bg-gray-900 focus:bg-gray-900 px-2 py-1 focus:outline font-mono text-xs w-full"
+					class="rounded bg-transparent hover:bg-gray-900 focus:bg-gray-900 p-3 pl-12 focus:outline font-mono text-xs w-full"
 				/>
 				<button
 					type="button"
-					class="opacity-0 hover:opacity-80"
+					class="absolute right-2 opacity-0 hover:opacity-80"
 					on:click={() => {
 						initScripts = [...initScripts.slice(0, i), ...initScripts.slice(i + 1)];
 					}}>❌</button
 				>
 			</div>
 		{/each}
-		<div class="flex gap-2 mb-1">
+		<div class="flex gap-2 mb-1 items-center rounded-lg overflow-hidden relative transition-all">
 			<input
 				type="radio"
 				name="script"
@@ -146,13 +154,13 @@
 				class="cursor-pointer"
 				hidden
 			/>
-			<StackIcon value={newScript} />
+			<StackIcon value={newScript} class="absolute left-2" />
 			<input
 				type="text"
 				placeholder="enter a new script"
 				bind:value={newScript}
 				on:focus={handleFocus}
-				class="bg-transparent hover:bg-gray-900 focus:bg-gray-900 px-2 py-1 focus:outline rounded font-mono text-xs w-full placeholder:text-gray-500"
+				class="rounded bg-transparent hover:bg-gray-900 focus:bg-gray-900 p-3 pl-12 focus:outline font-mono text-xs w-full"
 			/>
 		</div>
 	</fieldset>
