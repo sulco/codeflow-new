@@ -2,15 +2,21 @@
 	import { stacks } from './stacks';
 
 	export let value = '';
-	let stack = '';
+	const defaultStack = 'webcontainer-api';
+	let stack = defaultStack;
 
 	$: {
+		let matchFound = false;
 		for (let idx = 0; idx < stacks.length; idx++) {
 			const [pattern, result] = stacks[idx];
 			if (value.includes(pattern)) {
 				stack = result;
+				matchFound = true;
 				break;
 			}
+		}
+		if (!matchFound) {
+			stack = defaultStack;
 		}
 	}
 </script>
