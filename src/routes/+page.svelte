@@ -162,7 +162,7 @@
 				class="cursor-pointer"
 				hidden
 			/>
-			<StackIcon value={newScript} class="absolute left-2" />
+			<StackIcon value={newScript} class="absolute left-2 w-6" />
 			<input
 				type="text"
 				placeholder="enter a new script"
