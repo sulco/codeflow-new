@@ -4,6 +4,7 @@
 
 @layer components {
     .fieldset {
-        @apply border rounded border-gray-700 p-4 shadow-md;
+        @apply border rounded border-gray-700/50 p-4 shadow-md;
+        @apply bg-gray-900/60 bg-clip-padding backdrop-filter backdrop-blur-xl;
     }
 }

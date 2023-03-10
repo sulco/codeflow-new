@@ -5,6 +5,23 @@
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width" />
 		%sveltekit.head%
+		<style>
+			body {
+				background: url("https://blog.stackblitz.com/img/posts/bg-general.png") no-repeat !important;
+				background-size: cover !important;
+				background-position: bottom !important;
+			}
+			body::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: #000b;
+				z-index: -1;
+			}
+		</style>
 	</head>
 	<body data-sveltekit-preload-data="hover" class="h-full from-gray-800 bg-gradient-to-b to-gray-900 text-slate-100 text-sm leading-relaxed">
 		<div style="display: contents">%sveltekit.body%</div>

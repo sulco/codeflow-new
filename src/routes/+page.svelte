@@ -47,11 +47,11 @@
 
 <header class="flex gap-2">
 	<Codeflow class="w-12 mix-blend-luminosity opacity-50" />
-	<h1 class="my-6 text-xl text-gray-400">start a new project</h1>
+	<h1 class="my-6 text-xl text-white opacity-25">start a new project</h1>
 </header>
 
 <form class="grid gap-4" on:submit={handleSubmit}>
-	<fieldset class="fieldset bg-gray-800">
+	<fieldset class="fieldset">
 		<div class="field">
 			<label for="name" class="block mb-1">Project name:</label>
 			<input
@@ -68,7 +68,7 @@
 		💡 The settings you have used previously are already selected so you can hit [enter] to create a
 		project with the same setup
 	</p>
-	<fieldset class="fieldset bg-gray-800">
+	<fieldset class="fieldset">
 		<div class="grid grid-cols-2">
 			<section>
 				<h2 class="font-semibold mb-2">Git:</h2>
