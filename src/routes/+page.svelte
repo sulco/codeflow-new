@@ -9,8 +9,8 @@
 	import NoGit from '../components/no-git.svelte';
 
 	let projectName = 'demo';
-	let gitOption = 0;
-	let initOption = 1;
+	let gitOption = 1;
+	let initOption = 3;
 	let nameInputRef: HTMLInputElement;
 
 	let gitOptions = [
@@ -62,7 +62,7 @@
 				autocomplete="off"
 				id="name"
 				bind:this={nameInputRef}
-				class="bg-gray-900 px-2 focus:outline text-lg"
+				class="bg-gray-900 px-2 outline outline-slate-500/10 outline-1 focus:outline-slate-400/40 text-lg rounded-sm"
 				type="text"
 				bind:value={projectName}
 			/>
@@ -74,77 +74,78 @@
 		project with the same setup
 	</p>
 	<fieldset class="fieldset">
-		<div class="grid grid-cols-2">
-			<section>
-				<h2 class="font-semibold mb-2">Git:</h2>
-				{#each gitOptions as option, i}
-					<div
-						class="flex gap-2 mb-1 rounded-lg overflow-hidden transition-all {gitOption === i
-							? 'bg-slate-400/10'
-							: ''}"
-					>
-						<input
-							type="radio"
-							name="git"
-							id="g{i}"
-							value={i}
-							bind:group={gitOption}
-							class="cursor-pointer"
-							hidden
-						/>
-						<label for="g{i}" class="cursor-pointer flex w-full gap-2 p-3 hover:bg-slate-400/5"
-							><svelte:component this={option.logo} class="w-6 h-6" />
-							{option.label}{option.dynamic ? kebabCase(projectName) : ''}</label
-						>
-					</div>
-				{/each}
-			</section>
-
-			<section>
-				<h2 class="font-semibold mb-2">Initialize project with:</h2>
-				{#each initScripts as option, i}
-					<div class="flex gap-2 mb-1 group">
-						<input
-							type="radio"
-							name="script"
-							id="g{i}"
-							value={i}
-							bind:group={initOption}
-							class="cursor-pointer"
-						/>
-						<input
-							type="text"
-							bind:value={option}
-							on:click={() => (initOption = i)}
-							on:focus={handleFocus}
-							class="bg-transparent hover:bg-gray-900 focus:bg-gray-900 px-2 py-1 focus:outline font-mono text-xs w-full"
-						/>
-						<button
-							type="button"
-							class="opacity-0 hover:opacity-80"
-							on:click={() => {
-								initScripts = [...initScripts.slice(0, i), ...initScripts.slice(i + 1)];
-							}}>❌</button
-						>
-					</div>
-				{/each}
-				<div class="flex gap-2 mb-1">
+		<h2 class="font-semibold mb-2">Git:</h2>
+		<section>
+			{#each gitOptions as option, i}
+				<div
+					class="flex gap-2 mb-1 rounded-lg overflow-hidden transition-all {gitOption === i
+						? 'bg-slate-400/10'
+						: ''}"
+				>
 					<input
 						type="radio"
-						name="script"
-						id="g{initScripts.length}"
-						value={initScripts.length}
-						bind:group={initOption}
+						name="git"
+						id="g{i}"
+						value={i}
+						bind:group={gitOption}
 						class="cursor-pointer"
+						hidden
 					/>
-					<input
-						type="text"
-						placeholder="enter a new script"
-						on:focus={handleFocus}
-						class="bg-transparent hover:bg-gray-900 focus:bg-gray-900 px-2 py-1 focus:outline rounded font-mono text-xs w-full placeholder:text-gray-500"
-					/>
+					<label for="g{i}" class="cursor-pointer flex w-full gap-2 p-3 hover:bg-slate-400/5"
+						><svelte:component
+							this={option.logo}
+							class="w-6 h-6 {gitOption === i ? 'opacity-100' : 'opacity-50'}"
+						/>
+						{option.label}{option.dynamic ? kebabCase(projectName) : ''}</label
+					>
 				</div>
-			</section>
+			{/each}
+		</section>
+	</fieldset>
+
+	<fieldset class="fieldset">
+		<h2 class="font-semibold mb-2">Initialization script:</h2>
+		{#each initScripts as option, i}
+			<div class="flex gap-2 mb-1 group">
+				<input
+					type="radio"
+					name="script"
+					id="g{i}"
+					value={i}
+					bind:group={initOption}
+					class="cursor-pointer"
+				/>
+				<input
+					type="text"
+					bind:value={option}
+					on:click={() => (initOption = i)}
+					on:focus={handleFocus}
+					class="rounded bg-transparent hover:bg-gray-900 focus:bg-gray-900 px-2 py-1 focus:outline font-mono text-xs w-full"
+				/>
+				<button
+					type="button"
+					class="opacity-0 hover:opacity-80"
+					on:click={() => {
+						initScripts = [...initScripts.slice(0, i), ...initScripts.slice(i + 1)];
+					}}>❌</button
+				>
+			</div>
+		{/each}
+		<div class="flex gap-2 mb-1">
+			<input
+				type="radio"
+				name="script"
+				id="g{initScripts.length}"
+				value={initScripts.length}
+				bind:group={initOption}
+				class="cursor-pointer"
+			/>
+			<input
+				type="text"
+				placeholder="enter a new script"
+				on:focus={handleFocus}
+				class="bg-transparent hover:bg-gray-900 focus:bg-gray-900 px-2 py-1 focus:outline rounded font-mono text-xs w-full placeholder:text-gray-500"
+			/>
 		</div>
 	</fieldset>
 
