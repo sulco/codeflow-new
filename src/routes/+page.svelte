@@ -7,6 +7,7 @@
 	import Github from '../components/github.svelte';
 	import Gitlab from '../components/gitlab.svelte';
 	import NoGit from '../components/no-git.svelte';
+	import StackIcon from '../components/stack-icon.svelte';
 
 	let projectName = 'demo';
 	let gitOption = 1;
@@ -26,6 +27,8 @@
 		'npm init video',
 		'pnpm create next-app --typescript'
 	];
+
+	let newScript = '';
 
 	onMount(() => {
 		nameInputRef.focus();
@@ -114,7 +117,9 @@
 					value={i}
 					bind:group={initOption}
 					class="cursor-pointer"
+					hidden
 				/>
+				<StackIcon value={option} />
 				<input
 					type="text"
 					bind:value={option}
@@ -139,10 +144,13 @@
 				value={initScripts.length}
 				bind:group={initOption}
 				class="cursor-pointer"
+				hidden
 			/>
+			<StackIcon value={newScript} />
 			<input
 				type="text"
 				placeholder="enter a new script"
+				bind:value={newScript}
 				on:focus={handleFocus}
 				class="bg-transparent hover:bg-gray-900 focus:bg-gray-900 px-2 py-1 focus:outline rounded font-mono text-xs w-full placeholder:text-gray-500"
 			/>
