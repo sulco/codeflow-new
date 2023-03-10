@@ -1,8 +1,12 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { kebabCase } from 'lodash-es';
 	import { onMount } from 'svelte';
 	import Codeflow from '../components/codeflow.svelte';
-	import { kebabCase } from 'lodash-es';
-	import { goto } from '$app/navigation';
+	import Git from '../components/git.svelte';
+	import Github from '../components/github.svelte';
+	import Gitlab from '../components/gitlab.svelte';
+	import NoGit from '../components/no-git.svelte';
 
 	let projectName = 'demo';
 	let gitOption = 0;
@@ -10,10 +14,10 @@
 	let nameInputRef: HTMLInputElement;
 
 	let gitOptions = [
-		{ label: 'github.com/sulco/', dynamic: true },
-		{ label: 'gitlab.com/sulco/', dynamic: true },
-		{ label: 'just run `git init`', dynamic: false },
-		{ label: 'no git', dynamic: false }
+		{ label: 'github.com/sulco/', logo: Github, dynamic: true },
+		{ label: 'gitlab.com/sulco/', logo: Gitlab, dynamic: true },
+		{ label: 'just run `git init`', logo: Git, dynamic: false },
+		{ label: 'no git', logo: NoGit, dynamic: false }
 	];
 
 	let initScripts = [
@@ -81,9 +85,11 @@
 							value={i}
 							bind:group={gitOption}
 							class="cursor-pointer"
+							hidden
 						/>
 						<label for="g{i}" class="cursor-pointer"
-							>{option.label}{option.dynamic ? kebabCase(projectName) : ''}</label
+							><svelte:component this={option.logo} class="w-6 h-6" />
+							{option.label}{option.dynamic ? kebabCase(projectName) : ''}</label
 						>
 					</div>
 				{/each}
