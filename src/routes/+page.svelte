@@ -7,7 +7,6 @@
 	import GitOptions from '../components/git-options.svelte';
 	import StackIcon from '../components/stack-icon.svelte';
 	import InitScripts from '../components/init-scripts.svelte';
-	import { initScripts } from '../components/init-scripts';
 
 	let ready = false;
 	onMount(() => (ready = true));
@@ -16,7 +15,7 @@
 
 	let projectName = 'demo';
 	let gitOption = 1;
-	let initOption = 3;
+	let initScript = 'pnpm create next-app --typescript';
 	let nameInputRef: HTMLInputElement;
 
 	onMount(() => {
@@ -66,7 +65,7 @@
 			/>
 			<div class="absolute right-8 top-4">
 				<StackIcon
-					value={initScripts[initOption]}
+					value={initScript}
 					class="w-14 absolute right-4 max-w-none drop-shadow-[2px_4px_6px_rgba(0,0,0,0.5)]"
 				/>
 				<img
@@ -88,7 +87,7 @@
 
 		<fieldset class="fieldset" transition:fly={fadeIn(stagger * 1.8)}>
 			<h2 class="font-thin mb-2 opacity-50">Initialization script:</h2>
-			<InitScripts bind:value={initOption} />
+			<InitScripts bind:initScript />
 		</fieldset>
 
 		<button

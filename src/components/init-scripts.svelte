@@ -1,41 +1,70 @@
 <script lang="ts">
-	import { initScripts } from './init-scripts';
 	import StackIcon from './stack-icon.svelte';
 
-	export let value = 3;
+	export let initScript = '';
 
-	let newScript = '';
+	let initScripts = [
+		'npm create vite@latest',
+		'npx ng new',
+		'npm init video',
+		'pnpm create next-app --typescript',
+		''
+	];
+
+	$: {
+		if (initScripts.at(-1)?.length) {
+			addInitScript();
+			initScript = initScripts[initScripts.length - 2];
+		} else if (!initScripts.at(-1)?.length && !initScripts.at(-2)?.length) {
+			removeLastInitScript();
+			initScript = initScripts[initScripts.length - 2];
+		}
+	}
 
 	function handleFocus(e: any) {
 		setTimeout(() => {
 			e.target.selectionStart = e.target.selectionEnd = e.target.value.length;
 		});
 	}
+
+	function handleKeyup(e: any) {
+		initScript = e?.target.value;
+	}
+
+	function addInitScript() {
+		initScripts = [...initScripts, ''];
+	}
+
+	function removeLastInitScript() {
+		initScripts = [...initScripts.slice(0, initScripts.length - 1)];
+	}
 </script>
 
 {#each initScripts as option, i}
 	<div
 		class="flex gap-2 mb-1 items-center rounded-lg overflow-hidden relative transition-all 
-{value === i ? 'bg-slate-400/10' : ''}"
+			{option === initScript ? 'bg-slate-400/10' : ''}"
 	>
 		<input
 			type="radio"
 			name="script"
 			id="g{i}"
-			value={i}
-			bind:group={value}
+			value={option}
+			bind:group={initScript}
 			class="cursor-pointer"
 			hidden
 		/>
 		<StackIcon
 			value={option}
-			class="absolute left-2 w-6 {value === i ? 'opacity-100' : 'opacity-50'}"
+			class="absolute left-2 w-6 {option === initScript ? 'opacity-100' : 'opacity-50'}"
 		/>
 		<input
 			type="text"
 			bind:value={option}
-			on:click={() => (value = i)}
+			on:click={() => (initScript = option)}
 			on:focus={handleFocus}
+			on:keyup={handleKeyup}
+			placeholder="enter a new script"
 			class="rounded bg-transparent hover:bg-gray-900 focus:bg-gray-900 p-3 pl-12 focus:outline font-mono text-xs w-full"
 		/>
 		<!-- <button
@@ -47,22 +76,3 @@
 		> -->
 	</div>
 {/each}
-<div class="flex gap-2 mb-1 items-center rounded-lg overflow-hidden relative transition-all">
-	<input
-		type="radio"
-		name="script"
-		id="g{initScripts.length}"
-		value={initScripts.length}
-		bind:group={value}
-		class="cursor-pointer"
-		hidden
-	/>
-	<StackIcon value={newScript} class="absolute left-2 w-6" />
-	<input
-		type="text"
-		placeholder="enter a new script"
-		bind:value={newScript}
-		on:focus={handleFocus}
-		class="rounded bg-transparent hover:bg-gray-900 focus:bg-gray-900 p-3 pl-12 focus:outline font-mono text-xs w-full"
-	/>
-</div>
