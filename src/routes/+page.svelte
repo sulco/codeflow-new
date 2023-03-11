@@ -1,13 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { kebabCase } from 'lodash-es';
 	import { onMount } from 'svelte';
 	import { fly } from 'svelte/transition';
 	import Codeflow from '../components/codeflow.svelte';
-	import Git from '../components/git.svelte';
-	import Github from '../components/github.svelte';
-	import Gitlab from '../components/gitlab.svelte';
-	import NoGit from '../components/no-git.svelte';
+	import { gitOptions } from '../components/git-options';
+	import GitOptions from '../components/git-options.svelte';
 	import StackIcon from '../components/stack-icon.svelte';
 
 	let ready = false;
@@ -19,13 +16,6 @@
 	let gitOption = 1;
 	let initOption = 3;
 	let nameInputRef: HTMLInputElement;
-
-	let gitOptions = [
-		{ label: 'github.com/sulco/', logo: Github, dynamic: true },
-		{ label: 'gitlab.com/sulco/', logo: Gitlab, dynamic: true },
-		{ label: '`git init` only', logo: Git, dynamic: false },
-		{ label: 'no git', logo: NoGit, dynamic: false }
-	];
 
 	let initScripts = [
 		'npm create vite@latest',
@@ -93,7 +83,7 @@
 					class="w-14 absolute right-4 max-w-none drop-shadow-[2px_4px_6px_rgba(0,0,0,0.5)]"
 				/>
 				<svelte:component
-					this={gitOptions[gitOption].logo}
+					this={gitOptions[gitOption]?.logo}
 					class="w-6 h-6 absolute right-0 top-10 drop-shadow-[2px_4px_6px_rgba(0,0,0,0.5)]"
 				/>
 			</div>
@@ -105,32 +95,7 @@
 		</p>
 		<fieldset class="fieldset" transition:fly={fadeIn(stagger * 0.8)}>
 			<h2 class="font-thin mb-2 opacity-50">Version control:</h2>
-			<section>
-				{#each gitOptions as option, i}
-					<div
-						class="flex gap-2 mb-1 rounded-lg overflow-hidden transition-all {gitOption === i
-							? 'bg-slate-400/10'
-							: ''}"
-					>
-						<input
-							type="radio"
-							name="git"
-							id="g{i}"
-							value={i}
-							bind:group={gitOption}
-							class="cursor-pointer"
-							hidden
-						/>
-						<label for="g{i}" class="cursor-pointer flex w-full gap-2 p-3 hover:bg-slate-400/5"
-							><svelte:component
-								this={option.logo}
-								class="w-6 h-6 {gitOption === i ? 'opacity-100' : 'opacity-50'}"
-							/>
-							{option.label}{option.dynamic ? kebabCase(projectName) : ''}</label
-						>
-					</div>
-				{/each}
-			</section>
+			<GitOptions {projectName} bind:value={gitOption} />
 		</fieldset>
 
 		<fieldset class="fieldset" transition:fly={fadeIn(stagger * 1.8)}>
