@@ -6,6 +6,8 @@
 	import { gitOptions } from '../components/git-options';
 	import GitOptions from '../components/git-options.svelte';
 	import StackIcon from '../components/stack-icon.svelte';
+	import InitScripts from '../components/init-scripts.svelte';
+	import { initScripts } from '../components/init-scripts';
 
 	let ready = false;
 	onMount(() => (ready = true));
@@ -17,15 +19,6 @@
 	let initOption = 3;
 	let nameInputRef: HTMLInputElement;
 
-	let initScripts = [
-		'npm create vite@latest',
-		'npx ng new',
-		'npm init video',
-		'pnpm create next-app --typescript'
-	];
-
-	let newScript = '';
-
 	onMount(() => {
 		setTimeout(() => {
 			nameInputRef.focus();
@@ -33,12 +26,6 @@
 			nameInputRef.selectionEnd = nameInputRef.value.length;
 		}, stagger);
 	});
-
-	function handleFocus(e: any) {
-		setTimeout(() => {
-			e.target.selectionStart = e.target.selectionEnd = e.target.value.length;
-		});
-	}
 
 	function handleSubmit(e: Event) {
 		e.preventDefault();
@@ -101,59 +88,7 @@
 
 		<fieldset class="fieldset" transition:fly={fadeIn(stagger * 1.8)}>
 			<h2 class="font-thin mb-2 opacity-50">Initialization script:</h2>
-			{#each initScripts as option, i}
-				<div
-					class="flex gap-2 mb-1 items-center rounded-lg overflow-hidden relative transition-all 
-				{initOption === i ? 'bg-slate-400/10' : ''}"
-				>
-					<input
-						type="radio"
-						name="script"
-						id="g{i}"
-						value={i}
-						bind:group={initOption}
-						class="cursor-pointer"
-						hidden
-					/>
-					<StackIcon
-						value={option}
-						class="absolute left-2 w-6 {initOption === i ? 'opacity-100' : 'opacity-50'}"
-					/>
-					<input
-						type="text"
-						bind:value={option}
-						on:click={() => (initOption = i)}
-						on:focus={handleFocus}
-						class="rounded bg-transparent hover:bg-gray-900 focus:bg-gray-900 p-3 pl-12 focus:outline font-mono text-xs w-full"
-					/>
-					<button
-						type="button"
-						class="absolute right-2 opacity-0 hover:opacity-80"
-						on:click={() => {
-							initScripts = [...initScripts.slice(0, i), ...initScripts.slice(i + 1)];
-						}}>❌</button
-					>
-				</div>
-			{/each}
-			<div class="flex gap-2 mb-1 items-center rounded-lg overflow-hidden relative transition-all">
-				<input
-					type="radio"
-					name="script"
-					id="g{initScripts.length}"
-					value={initScripts.length}
-					bind:group={initOption}
-					class="cursor-pointer"
-					hidden
-				/>
-				<StackIcon value={newScript} class="absolute left-2 w-6" />
-				<input
-					type="text"
-					placeholder="enter a new script"
-					bind:value={newScript}
-					on:focus={handleFocus}
-					class="rounded bg-transparent hover:bg-gray-900 focus:bg-gray-900 p-3 pl-12 focus:outline font-mono text-xs w-full"
-				/>
-			</div>
+			<InitScripts bind:value={initOption} />
 		</fieldset>
 
 		<button
