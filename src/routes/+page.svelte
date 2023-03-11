@@ -82,9 +82,10 @@
 					value={initScripts[initOption]}
 					class="w-14 absolute right-4 max-w-none drop-shadow-[2px_4px_6px_rgba(0,0,0,0.5)]"
 				/>
-				<svelte:component
-					this={gitOptions[gitOption]?.logo}
-					class="w-6 h-6 absolute right-0 top-10 drop-shadow-[2px_4px_6px_rgba(0,0,0,0.5)]"
+				<img
+					src={'git-icons/' + gitOptions[gitOption]?.logo}
+					alt=""
+					class="w-6 h-6 absolute right-0 max-w-none top-10 drop-shadow-[2px_4px_6px_rgba(0,0,0,0.5)]"
 				/>
 			</div>
 		</fieldset>
