@@ -76,16 +76,20 @@
 			</div>
 		</fieldset>
 
-		<p class="text-xs mt-4 text-gray-500" transition:fly={fadeIn(stagger * 0.5)}>
+		<p class="text-xs mt-4 text-gray-500" transition:fly={fadeIn(stagger * 1.5)}>
 			💡 Your previous choices are already selected so you can hit [enter] to create a project with
 			the same setup
 		</p>
-		<fieldset class="fieldset" transition:fly={fadeIn(stagger * 0.8)}>
-			<h2 class="font-thin mb-2 opacity-50">Version control:</h2>
-			<GitOptions {projectName} bind:value={gitOption} />
+		<fieldset class="fieldset" transition:fly={fadeIn(stagger * 3)}>
+			<details>
+				<summary class="font-thin mb-2 opacity-50 cursor-pointer"
+					><span class="ml-1">Version control:</span></summary
+				>
+				<GitOptions {projectName} bind:value={gitOption} />
+			</details>
 		</fieldset>
 
-		<fieldset class="fieldset" transition:fly={fadeIn(stagger * 1.8)}>
+		<fieldset class="fieldset" transition:fly={fadeIn(stagger * 4.8)}>
 			<h2 class="font-thin mb-2 opacity-50">Initialization script:</h2>
 			<InitScripts bind:initScript />
 		</fieldset>
