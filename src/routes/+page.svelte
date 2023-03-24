@@ -7,6 +7,7 @@
 	import GitOptions from '../components/git-options.svelte';
 	import StackIcon from '../components/stack-icon.svelte';
 	import InitScripts from '../components/init-scripts.svelte';
+	import Preset from '../components/Preset.svelte';
 
 	let ready = false;
 	onMount(() => (ready = true));
@@ -105,18 +106,8 @@
 			</section>
 			<section class="grid col-span-2 gap-2 items-start">
 				<h2 class="opacity-60">Presets</h2>
-
 				{#each presets as preset}
-					<button class="fieldset text-left" transition:fly={fadeIn(stagger * 3)}>
-						{#each preset.tags as tag}
-							<span
-								class="absolute top-2 right-2 text-[10px] bg-slate-400 px-1 rounded-sm text-slate-900 uppercase font-semibold"
-								>{tag}</span
-							>
-						{/each}
-						<h2 class="mb-2">{preset.name}</h2>
-						<code class="block font-mono text-[10px] leading-snug">{preset.command}</code>
-					</button>
+					<Preset {...preset} />
 				{/each}
 			</section>
 		</div>
