@@ -13,6 +13,12 @@
 	let duration = 400;
 	let stagger = 100;
 
+	let presets = [
+		{ name: 'Astro Blog', command: 'npm create astro@latest -- --template blog', tags: ['blog'] },
+		{ name: 'Presentation Slides', command: 'npm init slidev', tags: ['creative'] },
+		{ name: 'Video Project', command: 'npm init video', tags: ['creative'] }
+	];
+
 	let projectName = 'demo';
 	let gitOption = 1;
 	let initScript = 'pnpm create next-app --typescript';
@@ -80,19 +86,40 @@
 			💡 Your previous choices are already selected so you can hit [enter] to create a project with
 			the same setup
 		</p>
-		<fieldset class="fieldset" transition:fly={fadeIn(stagger * 3)}>
-			<details>
-				<summary class="font-thin mb-2 opacity-50 cursor-pointer"
-					><span class="ml-1">Version control:</span></summary
-				>
-				<GitOptions {projectName} bind:value={gitOption} />
-			</details>
-		</fieldset>
 
-		<fieldset class="fieldset" transition:fly={fadeIn(stagger * 4.8)}>
-			<h2 class="font-thin mb-2 opacity-50">Initialization script:</h2>
-			<InitScripts bind:initScript />
-		</fieldset>
+		<div class="grid items-start grid-cols-5 gap-2">
+			<section class="col-span-3 grid gap-2">
+				<h2 class="opacity-60">Settings</h2>
+				<fieldset class="fieldset" transition:fly={fadeIn(stagger * 3)}>
+					<details>
+						<summary class="font-thin mb-2 opacity-50 cursor-pointer"
+							><span class="ml-1">Version control:</span></summary
+						>
+						<GitOptions {projectName} bind:value={gitOption} />
+					</details>
+				</fieldset>
+				<fieldset class="fieldset" transition:fly={fadeIn(stagger * 4.8)}>
+					<h2 class="font-thin mb-2 opacity-50">Initialization script:</h2>
+					<InitScripts bind:initScript />
+				</fieldset>
+			</section>
+			<section class="grid col-span-2 gap-2 items-start">
+				<h2 class="opacity-60">Presets</h2>
+
+				{#each presets as preset}
+					<button class="fieldset text-left" transition:fly={fadeIn(stagger * 3)}>
+						{#each preset.tags as tag}
+							<span
+								class="absolute top-2 right-2 text-[10px] bg-slate-400 px-1 rounded-sm text-slate-900 uppercase font-semibold"
+								>{tag}</span
+							>
+						{/each}
+						<h2 class="mb-2">{preset.name}</h2>
+						<code class="block font-mono text-[10px] leading-snug">{preset.command}</code>
+					</button>
+				{/each}
+			</section>
+		</div>
 
 		<button
 			transition:fly={fadeIn(stagger * 2.5)}
